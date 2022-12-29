@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Filter: woocommerce_pos_jwt_auth_not_before - 10up Distributor Hook Docs</title>
+    <title>Filter: woocommerce_pos_print_receipt_path - 10up Distributor Hook Docs</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -21,7 +21,7 @@
 <div id="main">
 
 	
-    <h1 class="page-title">Filter: woocommerce_pos_jwt_auth_not_before</h1>
+    <h1 class="page-title">Filter: woocommerce_pos_print_receipt_path</h1>
 	
 
     
@@ -43,14 +43,14 @@
 
     
 
-    <h4 class="name" id="woocommerce_pos_jwt_auth_not_before">apply_filters( 'woocommerce_pos_jwt_auth_not_before', <span class="signature">$issued_at )</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="woocommerce_pos_print_receipt_path">apply_filters( 'woocommerce_pos_print_receipt_path', <span class="signature">$path )</span><span class="type-signature"> &rarr; {string}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>Filters the JWT issued at time.</p>
+    <p>Filters the path to the receipt template file.</p>
 </div>
 
 
@@ -84,7 +84,7 @@
 
         <tr>
             
-                <td class="name"><code>$issued_at</code></td>
+                <td class="name"><code>$path</code></td>
             
 
             <td class="type">
@@ -100,7 +100,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>Full server path to the template file.</p></td>
         </tr>
 
     
@@ -144,7 +144,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="API_Auth.php.html">API/Auth.php</a>, <a href="API_Auth.php.html#line211">line 211</a>
+        <a href="Templates_Receipt.php.html">Templates/Receipt.php</a>, <a href="Templates_Receipt.php.html#line65">line 65</a>
     </li></ul></dd>
     
 
@@ -171,7 +171,7 @@
 
         
 <div class="param-desc">
-    <p>Issued at time</p>
+    <p>$path Full server path to the template file.</p>
 </div>
 
 
