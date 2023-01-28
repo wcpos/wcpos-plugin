@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Source: Admin/Notices.php - 10up Distributor Hook Docs</title>
+    <title>Filter: woocommerce_pos_jwt_auth_token_before_sign - 10up Distributor Hook Docs</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -21,91 +21,207 @@
 <div id="main">
 
 	
-    <h1 class="page-title">Source: Admin/Notices.php</h1>
+    <h1 class="page-title">Filter: woocommerce_pos_jwt_auth_token_before_sign</h1>
 	
 
     
 
 
 
+
+<section>
+
+<header>
+    <h2></h2>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>&lt;?php
+</header>
 
-/**
- * Admin Notices
- * - add notices via static method or filter.
- *
- * @author   Paul Kilmurray &lt;paul@kilbot.com>
- *
- * @see     http://wcpos.com
- */
+<article>
+    <div class="container-overview">
+    
+        
 
-namespace WCPOS\WooCommercePOS\Admin;
+    
 
-class Notices {
-	// @var
-	private static $notices = array();
+    <h4 class="name" id="woocommerce_pos_jwt_auth_token_before_sign">apply_filters( 'woocommerce_pos_jwt_auth_token_before_sign', <span class="signature">$token, $user )</span><span class="type-signature"> &rarr; {string}</span></h4>
 
-	/**
-	 * Constructor.
-	 */
-	public function __construct() {
-		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
-	}
+    
 
-	/**
-	 * Add a message for display.
-	 *
-	 * @param string $message
-	 * @param string $type        (error | warning | success | info)
-	 * @param bool   $dismissable
-	 */
-	public static function add( $message = '', $type = 'error', $dismissable = true ): void {
-		self::$notices[] = array(
-			'type'        => $type,
-			'message'     => $message,
-			'dismissable' => $dismissable,
-		);
-	}
 
-	/**
-	 * Display the admin notices.
-	 */
-	public function admin_notices(): void {
-		/**
-		 * Filters the POS admin notices.
-		 *
-		 * @param {array} $notices
-		 *
-		 * @returns {array} $notices
-		 *
-		 * @since 1.0.0
-		 *
-		 * @hook woocommerce_pos_admin_notices
-		 */
-		$notices = apply_filters( 'woocommerce_pos_admin_notices', self::$notices );
-		if ( empty( $notices ) ) {
-			return;
-		}
 
-		foreach ( $notices as $notice ) {
-			$classes = 'notice notice-' . $notice['type'];
-			if ( $notice['dismissable'] ) {
-				$classes .= ' is-dismissable';
-			}
-			if ( $notice['message'] ) {
-				echo '&lt;div class="' . $classes . '">&lt;p>' .
-					 wp_kses( $notice['message'], wp_kses_allowed_html( 'post' ) ) .
-					 '&lt;/p>&lt;/div>';
-			}
-		}
-	}
-}
-</code></pre>
-        </article>
-    </section>
+<div class="description">
+    <p>Let the user modify the token data before the sign.</p>
+</div>
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>$token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>$user</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">WP_User</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="API_Auth.php.html">API/Auth.php</a>, <a href="API_Auth.php.html#line250">line 250</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Token</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+    
+    </div>
+
+    
+</article>
+
+</section>
 
 
 
