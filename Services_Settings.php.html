@@ -66,6 +66,20 @@ class Settings {
             'order_status' => 'wc-completed',
             'admin_emails' => true,
             'customer_emails' => true,
+            // this is used in the POS, not in WP Admin (at the moment)
+            'dequeue_script_handles' => array(
+                'admin-bar',
+                'wc-add-to-cart',
+            ),
+            'dequeue_style_handles' => array(
+                'admin-bar',
+                'woocommerce-general',
+                'woocommerce-inline',
+                'woocommerce-layout',
+                'woocommerce-smallscreen',
+                'woocommerce-blocktheme',
+                'wp-block-library',
+            ),
         ),
         'payment_gateways' => array(
             'default_gateway' => 'pos_cash',
@@ -80,7 +94,9 @@ class Settings {
                 ),
             ),
         ),
-        'license' => array(),
+        'tools' => array(
+            'use_jwt_as_param' => false,
+        ),
     );
 
     /**
@@ -161,10 +177,15 @@ class Settings {
      * @return array
      */
     public function get_general_settings(): array {
-        $general_settings = array_replace_recursive(
-            self::$default_settings['general'],
-            get_option( self::$db_prefix . 'general', array() )
-        );
+        $default_settings = self::$default_settings['general'];
+        $settings = get_option( self::$db_prefix . 'general', array() );
+
+        // if the key does not exist in db settings, use the default settings
+        foreach ( $default_settings as $key => $value ) {
+            if ( ! array_key_exists( $key, $settings ) ) {
+                $settings[ $key ] = $value;
+            }
+        }
 
         /**
          * Filters the general settings.
@@ -174,17 +195,22 @@ class Settings {
          * @since 1.0.0
          * @hook woocommerce_pos_general_settings
          */
-        return apply_filters( 'woocommerce_pos_general_settings', $general_settings );
+        return apply_filters( 'woocommerce_pos_general_settings', $settings );
     }
 
     /**
      * @return array
      */
     public function get_checkout_settings(): array {
-        $checkout_settings = array_replace_recursive(
-            self::$default_settings['checkout'],
-            get_option( self::$db_prefix . 'checkout', array() )
-        );
+        $default_settings = self::$default_settings['checkout'];
+        $settings = get_option( self::$db_prefix . 'checkout', array() );
+
+        // if the key does not exist in db settings, use the default settings
+        foreach ( $default_settings as $key => $value ) {
+            if ( ! array_key_exists( $key, $settings ) ) {
+                $settings[ $key ] = $value;
+            }
+        }
 
         /**
          * Filters the checkout settings.
@@ -194,7 +220,7 @@ class Settings {
          * @since 1.0.0
          * @hook woocommerce_pos_checkout_settings
          */
-        return apply_filters( 'woocommerce_pos_checkout_settings', $checkout_settings );
+        return apply_filters( 'woocommerce_pos_checkout_settings', $settings );
     }
 
     /**
@@ -239,20 +265,34 @@ class Settings {
     }
 
     /**
+     * @return array
+     */
+    public function get_tools_settings(): array {
+        $default_settings = self::$default_settings['tools'];
+        $settings = get_option( self::$db_prefix . 'tools', array() );
+
+        // if the key does not exist in db settings, use the default settings
+        foreach ( $default_settings as $key => $value ) {
+            if ( ! array_key_exists( $key, $settings ) ) {
+                $settings[ $key ] = $value;
+            }
+        }
+
+        /**
+         * Filters the tools settings.
+         *
+         * @param {array} $settings
+         * @returns {array} $settings
+         * @since 1.3.6
+         * @hook woocommerce_pos_general_settings
+         */
+        return apply_filters( 'woocommerce_pos_tools_settings', $settings );
+    }
+
+    /**
      *
      */
     public function get_license_settings() {
-        $settings = array();
-
-        if ( class_exists( '\WCPOS\WooCommercePOSPro' ) ) {
-            $settings = get_option( self::$db_prefix . 'license', array() );
-        }
-
-        $license_settings = array_replace_recursive(
-            self::$default_settings['license'],
-            $settings
-        );
-
         /**
          * Filters the license settings.
          *
@@ -261,7 +301,7 @@ class Settings {
          * @since 1.0.0
          * @hook woocommerce_pos_license_settings
          */
-        return apply_filters( 'woocommerce_pos_license_settings', $license_settings );
+        return apply_filters( 'woocommerce_pos_license_settings', array() );
     }
 
     /**
