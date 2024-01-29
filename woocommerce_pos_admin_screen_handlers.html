@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Filter: woocommerce_pos_jwt_auth_token_before_sign - 10up Distributor Hook Docs</title>
+    <title>Action: woocommerce_pos_admin_screen_handlers - 10up Distributor Hook Docs</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -21,7 +21,7 @@
 <div id="main">
 
 	
-    <h1 class="page-title">Filter: woocommerce_pos_jwt_auth_token_before_sign</h1>
+    <h1 class="page-title">Action: woocommerce_pos_admin_screen_handlers</h1>
 	
 
     
@@ -43,14 +43,14 @@
 
     
 
-    <h4 class="name" id="woocommerce_pos_jwt_auth_token_before_sign">apply_filters( 'woocommerce_pos_jwt_auth_token_before_sign', <span class="signature">$token, $user )</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="woocommerce_pos_admin_screen_handlers">do_action( 'woocommerce_pos_admin_screen_handlers', <span class="signature">array, \WP_Screen )</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    <p>Let the user modify the token data before the sign.</p>
+    <p>Filters the screen handlers for WooCommerce POS admin screens.</p>
 </div>
 
 
@@ -84,15 +84,10 @@
 
         <tr>
             
-                <td class="name"><code>$token</code></td>
+                <td class="name"><code>array</code></td>
             
 
             <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
             
             </td>
 
@@ -100,22 +95,18 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>$handlers       Associative array of screen IDs and their corresponding handlers.
+Handler can be a class name or a callback array.</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>$user</code></td>
+                <td class="name"><code>\WP_Screen</code></td>
             
 
             <td class="type">
-            
-                
-<span class="param-type">WP_User</span>
-
-
             
             </td>
 
@@ -123,7 +114,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>$current_screen The current WP_Screen object being loaded in the admin.</p></td>
         </tr>
 
     
@@ -141,7 +132,7 @@
 
     
     <dt class="tag-since">Since:</dt>
-    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
+    <dd class="tag-since"><ul class="dummy"><li>1.4.10</li></ul></dd>
     
 
     
@@ -167,7 +158,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Services_Auth.php.html">Services/Auth.php</a>, <a href="Services_Auth.php.html#line165">line 165</a>
+        <a href="Admin.php.html">Admin.php</a>, <a href="Admin.php.html#line115">line 115</a>
     </li></ul></dd>
     
 
@@ -190,28 +181,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Token</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
